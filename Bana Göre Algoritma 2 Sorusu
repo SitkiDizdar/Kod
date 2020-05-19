@@ -1,0 +1,45 @@
+package artıkyıl;
+import java.util.Scanner;
+/**
+ *
+ * @author sıtkı dizdar
+ */
+public class ARTIKYIL {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        int yil;
+        Scanner klavye=new Scanner(System.in);
+        System.out.println("Lütfen bir yıl giriniz");
+        
+      
+        
+      yil=klavye.nextInt();
+      klavye.close();
+      boolean artik=false;
+      
+        
+        if(yil % 4 == 0)
+        {
+            if( yil % 100 == 0)
+            {
+                if ( yil % 400 == 0)
+                    artik = true;
+                else
+                    artik = false;
+            }
+            else
+                artik = true;
+        }
+        else
+            artik = false;
+ 
+        if(artik)
+            System.out.println(yil + " artık yıldır.");
+        else
+            System.out.println(yil + " artık yıl değildir.");
+    } 
+}
