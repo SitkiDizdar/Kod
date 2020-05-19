@@ -1,0 +1,121 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mayıntarlasıkod;
+import java.util.Scanner;
+import java.util.Random;
+/**
+ *
+ * @author sıtkı dizdar
+ */
+public class Mayıntarlasıkod {
+int rowNumber,colNumber,size;
+int[][] harita;
+int [][] board;
+boolean oyun=true;
+
+Random random= new Random();
+Scanner klavye= new Scanner(System.in);
+
+Mayıntarlasıkod(int rowNumber,int colNumber) {
+    this.rowNumber=rowNumber;
+    this.colNumber=colNumber;
+    this.harita= new int[rowNumber][colNumber];
+    this.board= new int[rowNumber][colNumber];
+    this.size=rowNumber*colNumber;
+}
+public void start(){
+    int satır,sütun,başarı=0;
+    hazırlama();
+    yazdır(harita);
+    System.out.println("⚡⚡⚡ Başladı ⚡⚡⚡");
+    while(oyun){
+        yazdır(board);
+        System.out.print("Satır:");
+        satır=klavye.nextInt();
+        System.out.print("Sütun:");
+        sütun=klavye.nextInt();
+        if(satır<=0 || satır >= rowNumber) {
+            System.out.println("🅾🅾 Geçersiz Nokta 🅾🅾");
+            continue;
+        }
+        if(sütun<0 || satır >= colNumber) {
+            System.out.println("🅾🅾 Geçersiz Nokta 🅾🅾");
+            continue;
+        }
+        if(harita[satır][sütun] != -1){
+            check(satır,sütun);
+            başarı++;
+            if(başarı== (size - (size/4))){
+                System.out.println("👋👋 Mükemmel👋👋 ");
+                break;
+            }
+        }else{
+            oyun=false;
+            System.out.println("🕹🕹 Oyun Bitti 🕹🕹");
+        }
+    }
+}
+public void check(int satır,int sütun){
+    if(harita[satır][sütun]== 0){
+    }
+    if((sütun<colNumber -1) && (harita[satır][sütun+1] == -1)){
+        board[satır][sütun]++;
+    }
+    if((satır<rowNumber -1)&& (harita[satır+1][sütun] == -1)){
+        board[satır][sütun]++;
+    }
+    if((satır>0)&&(harita[satır-1][sütun] == -1)){
+        board[satır][sütun]++;
+    }
+    if((sütun>0)&& (harita[satır][sütun-1] == -1)){
+        board[satır][sütun]++;
+    }
+    if(board[satır][sütun]==0){
+        board[satır][sütun]= -2;
+    }
+}
+public void hazırlama(){
+    int randomRow,randomCol,sayaç=0;
+    while(sayaç!= (size/4)){
+    
+        randomRow=random.nextInt(rowNumber);
+        randomCol=random.nextInt(colNumber);
+        if(harita[randomRow][randomCol]!= -1){
+            harita [randomRow][randomCol]= -1;
+            sayaç++;
+        }
+}
+}
+public void yazdır(int [][] array){
+    for(int i=0;i<array.length;i++){
+       for(int j=0;j<array[0].length;j++){
+           if(array[i][j]>=0)
+               System.out.print("");
+           
+           System.out.print(array[i][j]+"");
+       } 
+        System.out.println("");
+     }
+}
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner klavye= new Scanner(System.in);
+        
+        System.out.println("😊 Hoşgeldiniz 😊");
+        System.out.println("Lütfen oyun için boyutları giriniz");
+        System.out.println("Satır Sayısı");
+        int row=klavye.nextInt();
+        System.out.println("Sütun Sayısı");
+        int column=klavye.nextInt();
+        
+        Mayıntarlasıkod mayin= new Mayıntarlasıkod(row,column);
+        mayin.start();
+    }
+    
+}
