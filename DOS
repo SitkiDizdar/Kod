@@ -1,0 +1,168 @@
+package DOS;
+
+import java.util.Scanner;
+
+public class DOS {
+
+
+ public static void oyun_goster(char [][]dos){
+
+
+        for (int i = 0; i < dos.length; i++) {
+
+
+            for (int j = 0; j < dos.length; j++) {
+
+
+                System.out.print(dos[j]+" ");
+
+
+            }System.out.println("");
+}
+
+}
+
+
+    public static boolean dolumu(char[][]dos,int a,int b){
+
+
+        if(dos[a]=='D' || dos[a]=='O' || dos[a]=='S'){
+           return true;}
+
+
+        else{
+            return false;
+           }
+           }
+     public static boolean puan(char[][]dos){
+
+        if(dos[0][0]=='D' && dos[0][1]=='O' && dos[0][2]=='S')
+
+           return true;
+       
+        if(dos[1][0]=='D' && dos[1][1]=='O' && dos[1][2]=='S')
+
+           return true;
+
+        if(dos[2][0]=='D' && dos[2][1]=='O' && dos[2][2]=='S')
+
+           return true;
+
+        if(dos[0][0]=='D' && dos[1][1]=='O' && dos[2][2]=='S')
+
+           return true;
+
+        if(dos[0][0]=='D' && dos[1][0]=='O' && dos[2][0]=='S')
+
+           return true;
+
+        if(dos[0][1]=='D' && dos[1][1]=='O' && dos[2][1]=='S')
+
+           return true;
+
+        if(dos[0][2]=='D' && dos[1][2]=='O' && dos[2][2]=='S')
+
+           return true;
+
+        if(dos[0][2]=='D' && dos[1][1]=='O' && dos[2][0]=='S')
+
+           return true;
+
+        else
+        return false;
+  
+         }
+
+    public static void main(String[] args) {
+      Scanner klavye=new Scanner (System.in);
+       int x,y,sayac=0; 
+       int player1=0,player2=0,player3=0;
+
+       char z;
+
+       double r=Math.random();
+       char[][]dos={{'-','-','-'}, {'-','-','-'}, {'-','-','-'}};
+
+               while(sayac<9){
+
+                      do{
+                   System.out.print("Player 1 X ve Y koordinatlarını giriniz:");
+                    x=klavye.nextInt();
+                    y=klavye.nextInt();
+
+                    System.out.print("D giriniz:");
+                    z=klavye.next().toUpperCase().charAt(0);
+            
+                    if(dolumu(dos,x,y)==true)
+
+                              System.out.println("Girdiğin konum dolu!");
+                              
+                         }while(dolumu(dos,x,y)==true);
+
+                    dos[x][y]=z;
+                    if(puan(dos)==true && r<=0.5){
+                       player1++;}
+
+                    oyun_goster(dos);
+
+                    System.out.print("PUAN nplayer 1:"+player1+"nplayer 2:"+player2+"nplayer 3:"+player3+"n");
+
+                        do{
+
+                    System.out.println("Player 2 X ve Y koordinatlarını giriniz:");
+
+                    x=klavye.nextInt();
+                    y=klavye.nextInt();
+
+                    System.out.print("O giriniz:");
+
+                    z=klavye.next().toUpperCase().charAt(0);
+
+                    if(dolumu(dos,x,y)==true)
+ 
+                                System.out.println("Girdiğin konum dolu!");
+
+                       }while(dolumu(dos,x,y)==true);
+
+                    dos[x][y]=z;
+
+                    if(puan(dos)==true && r>0.5){
+                        player2++;}
+
+                    oyun_goster(dos);
+
+                    System.out.print("PUAN nplayer 1:"+player1+"nplayer 2:"+player2+"nplayer 3:"+player3+"n");
+
+                    
+                    do{
+
+                    System.out.println("Player 3 X ve Y koordinatlarını giriniz:");
+
+                    x=klavye.nextInt();
+                    y=klavye.nextInt();
+
+                    System.out.print("S giriniz:");
+
+                    z=klavye.next().toUpperCase().charAt(0);
+
+                    if(dolumu(dos,x,y)==true)
+ 
+                                System.out.println("Girdiğin konum dolu!Tekrar konum girin.");
+
+                       }while(dolumu(dos,x,y)==true);
+
+                    dos[x][y]=z;
+
+                    if(puan(dos)==true && r>0.5){
+                        player3++;}
+
+                    oyun_goster(dos);
+
+                    System.out.print("PUAN nplayer 1:"+player1+"nplayer 2:"+player2+"nplayer 3:"+player3+"n");
+
+                    sayac++;
+                   }
+              }
+        }
+
+
